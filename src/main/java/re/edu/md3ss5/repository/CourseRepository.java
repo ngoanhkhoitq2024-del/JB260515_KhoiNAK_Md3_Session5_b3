@@ -10,5 +10,8 @@ import re.edu.md3ss5.entity.Course;
 import re.edu.md3ss5.entity.CourseStatus;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
-
+    @Query("SELECT c FROM Course c WHERE c.status = :status")
+    Page<Course> findAllByStatus(
+            @Param("status") CourseStatus status,
+            Pageable pageable);
 }

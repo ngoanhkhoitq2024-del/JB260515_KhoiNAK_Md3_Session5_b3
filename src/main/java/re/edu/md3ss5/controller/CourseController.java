@@ -23,8 +23,10 @@ public class CourseController {
             @RequestParam(defaultValue ="0") Integer page,
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(required = false) String sortBy,
-            @RequestParam(defaultValue = "DESC") Sort.Direction direction) {
-        PageResponse<CourseResponse> result = courseService.getPagedCourses(page,size,sortBy,direction);
-        return ResponseEntity.ok(new ApiResponse<>(true, "ok", result));
+            @RequestParam(defaultValue = "DESC") Sort.Direction direction,
+            @RequestParam(defaultValue = "ACTIVE") CourseStatus status){
+        PageResponse<CourseResponse> result =
+                courseService.getPagedCoursesByStatus(page,size,sortBy,direction, status);
+        return ResponseEntity.ok(new ApiResponse<>(true, "OK", result));
     }
 }
